@@ -24,8 +24,8 @@ class Details extends Component {
                                     as='a'>{clientInfo.general.firstName} {clientInfo.general.lastName}</Item.Header>
                                 <Item.Description>
                                     <p>JOB</p>
-                                    <p>{clientInfo.company}</p>
-                                    <p>{clientInfo.title}</p>
+                                    <p>{clientInfo.job.company}</p>
+                                    <p>{clientInfo.job.title}</p>
                                     <p>CONTACTS</p>
                                     <p>{clientInfo.contact.email}</p>
                                     <p>{clientInfo.contact.phone}</p>

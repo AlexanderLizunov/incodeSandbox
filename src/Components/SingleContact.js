@@ -11,7 +11,7 @@ class SingleContact extends Component {
     }
 
     showDetails(event) {
-        // console.log(event.target.tagName)
+        console.log(event.target.tagName)
 
         let target = event.target;
 
@@ -39,8 +39,8 @@ class SingleContact extends Component {
                 <List.Item className='sidebar-list-item' data-list-item='listitem' data-pos={this.props.posno} key={this.props.key} onClick={this.showDetails.bind(this)}>
                     <Image avatar src={this.props.avatar} />
                     <List.Content>
-                        <List.Header>{this.props.firstName}</List.Header>
-                        <List.Header>{this.props.lastName}</List.Header>
+                        <List.Header>{this.props.firstName} {this.props.lastName}</List.Header>
+                        <List.Header>{this.props.job} </List.Header>
                     </List.Content>
                 </List.Item>
 

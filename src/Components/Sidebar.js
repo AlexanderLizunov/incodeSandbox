@@ -15,10 +15,21 @@ class Sidebar extends Component {
     handleSearch(event) {
         const searchText = event.target.value.toLowerCase();
         let displayClients = this.props.clientList.filter(function (el) {
-            let searchName = el.general.firstName.toLowerCase();
-            let searchLastName = el.general.lastName.toLowerCase();
-            return (searchName.indexOf(searchText) !== -1 || searchLastName.indexOf(searchText) !== -1)
+            let control = false
+            for (var key in el) {
+                const sublist = el[key];
+                for (var subKey in sublist) {
+                    if (sublist[subKey].toLowerCase().indexOf(searchText) !== -1) {
+                        control = true
+                        console.log(sublist[subKey])
+                    }
+                }
+            }
+            return control
         });
+        console.log(displayClients)
+
+
         this.props.onListUpdate(displayClients)
         this.props.onClientPicked(false)
 
@@ -39,12 +50,12 @@ class Sidebar extends Component {
         if (contentUpdated.length > 0) {
             clientsArray = contentUpdated;
             listItems = clientsArray.map((client, b) =>
-                <SingleContact key={b} posno={b} firstName={client.general.firstName} lastName={client.general.lastName}
+                <SingleContact key={b} posno={b} firstName={client.general.firstName} job={client.job.title} lastName={client.general.lastName}
                                avatar={client.general.avatar}/>
             )
         } else if (clientsArray.length > 0 && this.state.noMatch === false) {
             listItems = clientsArray.map((client, b) =>
-                <SingleContact key={b} posno={b} firstName={client.general.firstName} lastName={client.general.lastName}
+                <SingleContact key={b} posno={b} firstName={client.general.firstName} job={client.job.title} lastName={client.general.lastName}
                                avatar={client.general.avatar}/>
             )
         }
@@ -53,9 +64,9 @@ class Sidebar extends Component {
                 <div className='sideBar-search-block'>
                     <Input className='sideBar-search-input' type="text"
                            onChange={this.handleSearch.bind(this)}/>
-                    <Icon disabled name='search' />
+                    <Icon disabled name='search'/>
                 </div>
-                <List  className="sidebar-client-list" selection verticalAlign='middle'>
+                <List className="sidebar-client-list" selection verticalAlign='middle'>
                     {listItems}
                 </List>
             </div>
