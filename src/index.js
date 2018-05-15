@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
+import {Container} from 'semantic-ui-react'
 
 import './index.css';
 import App from './App';
@@ -20,14 +21,12 @@ function clientlist(state = initialState, action) {
             clientList: action.payload,
             clientSearch: action.payload
         }
-    }
-    if (action.type === 'LIST_UPDATE') {
+    } else if (action.type === 'LIST_UPDATE') {
         return {
             ...state,
             clientSearch: action.payload
         }
-    }
-    if (action.type === 'CLIENT_PICKED') {
+    } else if (action.type === 'CLIENT_PICKED') {
         return {
             ...state,
             clientPicked: action.payload
@@ -44,7 +43,9 @@ store.subscribe(() => {
 
 ReactDOM.render(
     <Provider store={store}>
-        <App/>
+        <Container>
+            <App/>
+        </Container>
     </Provider>,
     document.getElementById('root')
 );

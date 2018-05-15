@@ -32,7 +32,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                <h1>Client-picker</h1>
+                <h1>Incode Sandbox Task</h1>
                 <div className="content-container">
                     <Sidebar value={this.state.clients}/>
                     <Details value={this.state.picked}/>

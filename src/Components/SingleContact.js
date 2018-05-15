@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
+import {List, Image} from 'semantic-ui-react'
 
 class SingleContact extends Component {
     constructor(props) {
@@ -10,21 +11,21 @@ class SingleContact extends Component {
     }
 
     showDetails(event) {
-        console.log(event.target.tagName)
+        // console.log(event.target.tagName)
 
         let target = event.target;
 
-        while (target != this) {
-            if (target.tagName == 'LI') {
-                console.log(
-                    target.getAttribute("data-pos"))
+        while (target !== this) {
+            if (target.getAttribute("data-list-item") == 'listitem') {
+                // console.log(
+                //     target.getAttribute("data-pos"))
                 this.setState(
                     {elementClickedIndex: target.getAttribute("data-pos")},
                     function () {
                         // this.props.showDetails(this.state.elementClickedIndex)
-                        console.log(this.state.elementClickedIndex)
+                        // console.log(this.state.elementClickedIndex)
                         this.props.onClientPicked(target.getAttribute("data-pos"))
-                        console.log(this.props.clientPicked)
+                        // console.log(this.props.clientPicked)
                     })
                 return;
             }
@@ -35,14 +36,14 @@ class SingleContact extends Component {
 
     render() {
         return (
-            <li className='sidebar-list-item' data-pos={this.props.posno} key={this.props.key}
-                onClick={this.showDetails.bind(this)}>
-                <img className='sidebar-client-image' src={this.props.avatar} alt=""/>
-                <div className="sidebar-name-block">
-                    <p>{this.props.firstName}</p>
-                    <p>{this.props.lastName}</p>
-                </div>
-            </li>
+                <List.Item className='sidebar-list-item' data-list-item='listitem' data-pos={this.props.posno} key={this.props.key} onClick={this.showDetails.bind(this)}>
+                    <Image avatar src={this.props.avatar} />
+                    <List.Content>
+                        <List.Header>{this.props.firstName}</List.Header>
+                        <List.Header>{this.props.lastName}</List.Header>
+                    </List.Content>
+                </List.Item>
+
         );
     }
 }
